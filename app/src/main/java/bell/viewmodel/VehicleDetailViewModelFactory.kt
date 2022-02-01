@@ -2,7 +2,7 @@ package bell.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import bell.data.repositories.VehicleRepository
+import bell.repositories.VehicleRepository
 
 class VehicleDetailViewModelFactory(private val repository: VehicleRepository) :
     ViewModelProvider.NewInstanceFactory(){

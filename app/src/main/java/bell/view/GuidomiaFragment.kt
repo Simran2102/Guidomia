@@ -7,36 +7,34 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import bell.data.models.CarListModelItem
+import bell.repositories.VehicleRepository
 import bell.viewmodel.VehicleDetailViewModelFactory
-import bell.data.repositories.VehicleRepository
 import bell.viewmodel.GuidomiaViewModel
 import com.bell.sample.app.guidomia.R
-import kotlinx.android.synthetic.main.guidomia_list_fragment.*
+import com.bell.sample.app.guidomia.databinding.GuidomiaActivityMainBinding
 
-class GuidomiaFragment : Fragment(), RecyclerViewClickListener {
+class GuidomiaFragment : Fragment() {
 
-    private lateinit var viewModel: GuidomiaViewModel
-    private lateinit var factory: VehicleDetailViewModelFactory
+    private var viewModel: GuidomiaViewModel ?= null
+    private var factory: VehicleDetailViewModelFactory? = null
+
+    private var _binding: GuidomiaActivityMainBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.guidomia_list_fragment, container, false)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
+        _binding = GuidomiaActivityMainBinding.inflate(inflater, container, false)
         val repository = VehicleRepository(requireContext())
         factory = VehicleDetailViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory).get(GuidomiaViewModel::class.java)
-        viewModel.getVehicleDetails()
+        viewModel = ViewModelProvider(this, factory!!).get(GuidomiaViewModel::class.java)
+        viewModel!!.getVehicleDetails()
 
-        viewModel.vehicleDetails.observe(viewLifecycleOwner, Observer { vehicleDetails ->
-            recycler_view_vehicle_details.also {
+
+        viewModel!!.vehicleDetails.observe(viewLifecycleOwner, Observer { vehicleDetails ->
+            binding.mainListView.recyclerViewVehicleDetails.also {
                 it.layoutManager = LinearLayoutManager(requireContext())
                 it.setHasFixedSize(true)
                 it.adapter = GuidomiaAdapter(vehicleDetails, requireContext())
@@ -70,20 +68,8 @@ class GuidomiaFragment : Fragment(), RecyclerViewClickListener {
         })
 
 
-
-
+        return binding.root
     }
 
-    override fun onRecyclerViewItemClick(
-        view: View,
-        carListModelItem: CarListModelItem,
-        position: Int
-    ) {
-        when (view.id) {
-            R.id.item_layout -> {
-                carListModelItem.visibility = !carListModelItem.visibility
-            }
-        }
-    }
 
 }
