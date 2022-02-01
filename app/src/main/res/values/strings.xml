@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Guidomia</string>
+
+    <integer-array name="list_of_cars">
+        <item>@drawable/range_rover</item>
+        <item>@drawable/alpine_roadster</item>
+        <item>@drawable/bmw</item>
+        <item>@drawable/mercedez_benz_</item>
+    </integer-array>
+</resources>
