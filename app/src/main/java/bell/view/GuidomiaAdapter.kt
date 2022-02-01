@@ -8,7 +8,7 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import bell.data.models.CarListModelItem
+import bell.models.CarListModelItem
 import com.bell.sample.app.guidomia.R
 import com.bell.sample.app.guidomia.databinding.CarParentBinding
 

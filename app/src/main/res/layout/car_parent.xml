@@ -6,7 +6,7 @@
         <import type="android.view.View" />
         <variable
             name="vehicle"
-            type="bell.data.models.CarListModelItem" />
+            type="bell.models.CarListModelItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
