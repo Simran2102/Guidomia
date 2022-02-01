@@ -10,7 +10,7 @@ import com.bell.sample.app.guidomia.R
 class ProsConsListAdapter() :
     RecyclerView.Adapter<ProsConsListAdapter.ViewHolder>() {
 
-    lateinit var pList: List<String>
+    private var pList: List<String>?= null
 
     constructor(prosList: List<String>) : this() {
         pList = prosList
@@ -25,14 +25,16 @@ class ProsConsListAdapter() :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val itemsViewModel = pList[position]
+        val itemsViewModel = pList?.get(position)
 
-        if (itemsViewModel.isNotEmpty())
-            holder.textView.text = itemsViewModel
+        if (itemsViewModel != null) {
+            if (itemsViewModel.isNotEmpty())
+                holder.textView.text = itemsViewModel
+        }
     }
 
     override fun getItemCount(): Int {
-        return pList.size
+        return pList?.size ?: 0
     }
 
     class ViewHolder(ItemView: View) : RecyclerView.ViewHolder(ItemView) {

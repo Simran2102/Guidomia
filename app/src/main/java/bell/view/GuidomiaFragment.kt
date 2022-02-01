@@ -8,33 +8,34 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import bell.repositories.VehicleRepository
-import bell.viewmodel.VehicleDetailViewModelFactory
 import bell.viewmodel.GuidomiaViewModel
+import bell.viewmodel.VehicleDetailViewModelFactory
 import com.bell.sample.app.guidomia.R
-import com.bell.sample.app.guidomia.databinding.GuidomiaActivityMainBinding
+import kotlinx.android.synthetic.main.guidomia_list_fragment.*
 
 class GuidomiaFragment : Fragment() {
 
     private var viewModel: GuidomiaViewModel ?= null
-    private var factory: VehicleDetailViewModelFactory? = null
-
-    private var _binding: GuidomiaActivityMainBinding? = null
-    private val binding get() = _binding!!
+    private var factory: VehicleDetailViewModelFactory?= null
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = GuidomiaActivityMainBinding.inflate(inflater, container, false)
+        return inflater.inflate(R.layout.guidomia_list_fragment, container, false)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
         val repository = VehicleRepository(requireContext())
         factory = VehicleDetailViewModelFactory(repository)
         viewModel = ViewModelProvider(this, factory!!).get(GuidomiaViewModel::class.java)
         viewModel!!.getVehicleDetails()
 
-
         viewModel!!.vehicleDetails.observe(viewLifecycleOwner, Observer { vehicleDetails ->
-            binding.mainListView.recyclerViewVehicleDetails.also {
+            recycler_view_vehicle_details.also {
                 it.layoutManager = LinearLayoutManager(requireContext())
                 it.setHasFixedSize(true)
                 it.adapter = GuidomiaAdapter(vehicleDetails, requireContext())
@@ -66,10 +67,5 @@ class GuidomiaFragment : Fragment() {
 
             }
         })
-
-
-        return binding.root
     }
-
-
 }
