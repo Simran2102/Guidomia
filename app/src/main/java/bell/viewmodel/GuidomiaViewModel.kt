@@ -1,4 +1,4 @@
-package bell.view
+package bell.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,8 +11,7 @@ import kotlinx.coroutines.Job
 class GuidomiaViewModel(private val repository: VehicleRepository) : ViewModel() {
 
     private val _vehicleDetails = MutableLiveData<List<CarListModelItem>>()
-    val vehicleDetails: LiveData<List<CarListModelItem>>
-        get() = _vehicleDetails
+    val vehicleDetails: LiveData<List<CarListModelItem>> = _vehicleDetails
 
     private lateinit var job: Job
 

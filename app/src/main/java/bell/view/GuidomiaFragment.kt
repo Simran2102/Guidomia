@@ -1,7 +1,6 @@
 package bell.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -9,8 +8,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import bell.data.models.CarListModelItem
-import bell.data.repositories.VehicleDetailViewModelFactory
+import bell.viewmodel.VehicleDetailViewModelFactory
 import bell.data.repositories.VehicleRepository
+import bell.viewmodel.GuidomiaViewModel
 import com.bell.sample.app.guidomia.R
 import kotlinx.android.synthetic.main.guidomia_list_fragment.*
 

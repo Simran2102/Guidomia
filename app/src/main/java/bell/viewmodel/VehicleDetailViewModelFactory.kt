@@ -1,8 +1,8 @@
-package bell.data.repositories
+package bell.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import bell.view.GuidomiaViewModel
+import bell.data.repositories.VehicleRepository
 
 class VehicleDetailViewModelFactory(private val repository: VehicleRepository) :
     ViewModelProvider.NewInstanceFactory(){
